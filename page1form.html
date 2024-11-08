@@ -40,14 +40,14 @@
 
     <div class="resume-output" id="resume-output">
       <p style="text-align: center; font-size: 20px; font-family: sans-serif;"><strong ></strong> <span id="output-name" ></span></p>
-      <p style="text-align: center;"><strong></strong> <img id="output-photo" alt="Uploaded photo" style="max-width: 100px; display: none; border-radius: 50%; align-items: center;" ></p>
+      <p style="text-align: center;"><strong></strong> <img id="output-photo" alt="Uploaded photo" style="max-width: 100px; display: none; border-radius: 50%; margin-left: 300px;" ></p>
       <p style="text-align: center; font-size: 15px; font-family: sans-serif;"><strong>Email:</strong> <span id="output-email"></span></p>
       <p style="text-align: center; font-size: 15px; font-family: sans-serif;"><strong>Phone:</strong> <span id="output-phone"></span></p>
       <p style="text-align: center; font-size: 15px; font-family: sans-serif;"><strong>GitHub:</strong> <span id="output-github"></span></p>
       <p style="text-align: center; font-size: 15px; font-family: sans-serif;"><strong>Experience:</strong> <span id="output-experience"></span></p>
       <p style="text-align: center; font-size: 15px; font-family: sans-serif;"><strong>LinkedIn:</strong> <span id="output-linkedin"></span></p>
       <p style="text-align: center; font-size: 15px; font-family: sans-serif;"><strong>Education:</strong> <span id="output-education"></span></p>
-      
+      <button onclick="downloadResume()" id ="download">Download Resume </button>
     </div>
   </div>
 
@@ -80,6 +80,23 @@
       document.getElementById("resume-output").style.display = "block";
       document.getElementById("resume-form").style.display = "none";
     }
+
+    function downloadResume() {
+    const resume = document.getElementById('resume_output');
+    const download = document.getElementById('download');
+
+    download.addEventListener('click', () => {
+        const options = {
+            margin: 1,
+            filename: 'Resume.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        
+        html2pdf().set(options).from(resume).save();
+    });
+}
   </script>
 </body>
 </html>
